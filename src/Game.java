@@ -6,10 +6,23 @@ public class Game extends JPanel {
 
     int x = 0;
     int y = 0;
+    int xa = 1;
+    int ya = 1;
+
+    int ballSize = 30;
 
     private void moveBall() {
-        x++;
-        y++;
+        if (x + xa < 0)
+            xa = 1;
+        if (x + xa > getWidth() - ballSize)
+            xa = -1;
+        if (y + ya < 0)
+            ya = 1;
+        if (y + ya > getHeight() - ballSize)
+            ya = -1;
+
+        x = x + xa;
+        y = y + ya;
     }
 
 
@@ -19,7 +32,7 @@ public class Game extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.fillOval(x,y,30,30);
+        g2d.fillOval(x,y,ballSize,ballSize);
     }
 
 
