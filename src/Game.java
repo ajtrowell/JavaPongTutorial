@@ -4,27 +4,11 @@ import java.awt.geom.Ellipse2D;
 
 public class Game extends JPanel {
 
-    int x = 0;
-    int y = 0;
-    int xa = 1;
-    int ya = 1;
+    Ball ball = new Ball(this);
 
-    int ballSize = 30;
-
-    private void moveBall() {
-        if (x + xa < 0)
-            xa = 1;
-        if (x + xa > getWidth() - ballSize)
-            xa = -1;
-        if (y + ya < 0)
-            ya = 1;
-        if (y + ya > getHeight() - ballSize)
-            ya = -1;
-
-        x = x + xa;
-        y = y + ya;
+    private void move() {
+        ball.move();
     }
-
 
     @Override
     public void paint(Graphics g) {
@@ -32,10 +16,8 @@ public class Game extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.fillOval(x,y,ballSize,ballSize);
+        ball.paint(g2d);
     }
-
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Mini Tennis");
@@ -46,7 +28,7 @@ public class Game extends JPanel {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         while (true) {
-            game.moveBall();
+            game.move();
             game.repaint();
             try {
                 Thread.sleep(10);
@@ -54,6 +36,5 @@ public class Game extends JPanel {
                     System.out.print(e);
             }
         }
-
     }
 }
