@@ -43,6 +43,11 @@ public class Game extends JPanel {
         racquet.paint(g2d);
     }
 
+    public void gameOver() {
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        System.exit(ABORT);
+    }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Mini Tennis");
         Game game = new Game();
